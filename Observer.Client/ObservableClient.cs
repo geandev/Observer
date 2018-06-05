@@ -1,4 +1,5 @@
-﻿using Observer.Core.Client;
+﻿using Observer.Core.Builders;
+using Observer.Core.Client;
 using Observer.Core.Server;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +12,8 @@ namespace Observer.Client
         public string Address { get; private set; }
         public bool Avaliable { get; private set; }
 
-        public ObservableClient(string instace, string address, bool avaliable)
+        public ObservableClient(IObservableClientBuilder builder)
         {
-            Instance = instace;
-            Address = address;
-            Avaliable = avaliable;
         }
 
         public Task NotifyClientUpAsync(params IObserverServer[] observerServers) => Task.WhenAll(observerServers.Select(o => o.ConnectAsync(this)));

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Observer.Core.Server
 {
-    class HttpObserverServer : IObserverServer
+    public class HttpObserverServer : IObserverServer
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl;

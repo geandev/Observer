@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Observer.Core.Builders;
 using Observer.Core.Client;
 using Observer.Core.Models;
 using Observer.Core.Server;
@@ -12,9 +13,8 @@ namespace Observer.Server
     {
         private readonly IClientStore _clientStore;
 
-        protected ObserverServer(IClientStore clientStore)
+        protected ObserverServer(IObserverServerBuilder builder)
         {
-            _clientStore = clientStore;
         }
 
         [HttpPost(Endpoints.Connect)]
