@@ -1,8 +1,9 @@
 ﻿using Observer.Core.Client;
+using Observer.Core.Factories;
 using Observer.Core.Server;
 using System.Collections.Generic;
 
-namespace Observer.Core.Builders
+namespace Observer.Client
 {
     public interface IObservableClientBuilder
     {
@@ -10,7 +11,8 @@ namespace Observer.Core.Builders
         string Address { get; }
         IEnumerable<IObserverServer> ObserverServers { get; }
 
-        IObservableClientBuilder AddObserver(string observerServerAddress);
-        IObservableClient Build();
+        IObservableClientBuilder AddObserver(string observerAddress);
+        IObservableClientBuilder UseUrls(string clientAddress);
+        IObservableClient Build(IObserverServerFactory observerServerFactory);
     }
 }

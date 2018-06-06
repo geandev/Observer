@@ -1,48 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using Observer.Core.Builders;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Observer.Core.Client;
 using Observer.Core.Factories;
 using Observer.Core.Server;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Observer.Client
 {
     public class ObservableClientBuilder : IObservableClientBuilder
     {
-        private readonly IList<IObserverServer> _observerServers;
-        private readonly IServiceProvider _serviceProvider;
-
         public string Instance { get; private set; }
         public string Address { get; private set; }
-        public IEnumerable<IObserverServer> ObserverServers => _observerServers;
 
-        private ObservableClientBuilder(string instance, IServiceProvider serviceProvider)
+        public readonly List<string> _observerServersAddress;
+        public IEnumerable<IObserverServer> ObserverServers { get; private set; }
+
+        public ObservableClientBuilder(string instance)
         {
             Instance = instance;
-            _serviceProvider = serviceProvider;
+            _observerServersAddress = new List<string>();
         }
 
-        public static IObservableClientBuilder Configure(string instance, IServiceProvider serviceProvider) => new ObservableClientBuilder(instance, serviceProvider);
-
-        public IObservableClientBuilder AddObserver(string observerServerAddress)
+        public IObservableClient Build(IObserverServerFactory observerServerFactory)
         {
-            _observerServers.Add(_serviceProvider.GetService<IObserverServerFactory>().FromAddress(observerServerAddress));
-            return this;
-        }
-
-        public IObservableClient Build()
-        {
-            Address = GetAddressFromHttpContextAccessor(_serviceProvider.GetService<IHttpContextAccessor>()).ToString();
+            ObserverServers = _observerServersAddress.Select(observerServerFactory.FromAddress);
             return new ObservableClient(this);
         }
 
-        private static Uri GetAddressFromHttpContextAccessor(IHttpContextAccessor accessor)
+        public IObservableClientBuilder UseUrls(string clientAddress)
         {
-            var request = accessor.HttpContext.Request;
-            return new UriBuilder { Scheme = request.Scheme, Host = request.Host.ToString() }.Uri;
+            Address = clientAddress;
+            return this;
         }
 
+        public IObservableClientBuilder AddObserver(string observerAddress)
+        {
+            _observerServersAddress.Add(observerAddress);
+            return this;
+        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Observer.Client.Api
 {
@@ -9,14 +7,14 @@ namespace Observer.Client.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddObservableClient();
+            services.AddObservableClient("ClientSample",
+                config => config
+                .UseUrls("http://localhost:5000")
+                .AddObserver("http://localhost:8091"));
         }
 
-        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider, IApplicationLifetime applicationLifetime)
+        public void Configure(IApplicationBuilder app)
         {
-            app.UseObservableClient("SampleClient", serviceProvider)
-                .AddObserver("http://localhost:8091").Build()
-                .WithLifeTime(applicationLifetime);
         }
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Observer.Core\Observer.Core.csproj" />
+    <ProjectReference Include="..\Observer.Server\Observer.Server.csproj" />
   </ItemGroup>
 
 </Project>

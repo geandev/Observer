@@ -1,6 +1,6 @@
 ﻿using Observer.Core.Store;
 
-namespace Observer.Core.Builders
+namespace Observer.Server
 {
     public interface IObserverServerBuilder
     {

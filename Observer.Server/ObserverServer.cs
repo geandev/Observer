@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Observer.Core.Builders;
 using Observer.Core.Client;
 using Observer.Core.Models;
 using Observer.Core.Server;
