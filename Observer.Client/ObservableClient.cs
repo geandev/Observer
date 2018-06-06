@@ -29,7 +29,7 @@ namespace Observer.Client
         public async Task NotifyServerAvaliable()
         {
             Avaliable = false;
-            await Task.WhenAll(ObserverServers.Select(s => s.ConnectAsync(this)));
+            await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(this)));
         }
     }
 }

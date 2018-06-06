@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{4332E6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Observer.Client.Api", "Observer.Client.Api\Observer.Client.Api.csproj", "{C3AFE807-ABC9-4238-A857-AA92C50BBC67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observer.Server.Api", "Observer.Server.Api\Observer.Server.Api.csproj", "{66D93248-F3F7-4376-96DB-C57A8F06A225}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +37,17 @@ Global
 		{C3AFE807-ABC9-4238-A857-AA92C50BBC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3AFE807-ABC9-4238-A857-AA92C50BBC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3AFE807-ABC9-4238-A857-AA92C50BBC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D93248-F3F7-4376-96DB-C57A8F06A225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D93248-F3F7-4376-96DB-C57A8F06A225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D93248-F3F7-4376-96DB-C57A8F06A225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D93248-F3F7-4376-96DB-C57A8F06A225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C3AFE807-ABC9-4238-A857-AA92C50BBC67} = {4332E666-B048-4BC2-8440-B6EE73D104D2}
+		{66D93248-F3F7-4376-96DB-C57A8F06A225} = {4332E666-B048-4BC2-8440-B6EE73D104D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64C244F4-505E-4E9D-9042-3C1325BFAAE8}
