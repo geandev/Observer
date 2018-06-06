@@ -15,6 +15,7 @@ namespace Observer.Server
 
         protected ObserverServer(IObserverServerBuilder builder)
         {
+            _clientStore = builder.Storage;
         }
 
         [HttpPost(Endpoints.Connect)]

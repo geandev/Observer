@@ -1,8 +1,16 @@
-﻿namespace Observer.Core.Builders
+﻿using Observer.Core.Client;
+using Observer.Core.Server;
+using System.Collections.Generic;
+
+namespace Observer.Core.Builders
 {
     public interface IObservableClientBuilder
     {
-        IObservableClientBuilder InstanceName(string instanceName);
-        IObservableClientBuilder AddObserver(string address);
+        string Instance { get; }
+        string Address { get; }
+        IEnumerable<IObserverServer> ObserverServers { get; }
+
+        IObservableClientBuilder AddObserver(string observerServerAddress);
+        IObservableClient Build();
     }
 }
