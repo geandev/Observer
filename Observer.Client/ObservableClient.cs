@@ -23,13 +23,13 @@ namespace Observer.Client
         public async Task NotifyServerUnvaliable()
         {
             Avaliable = true;
-            await Task.WhenAll(ObserverServers.Select(s => s.ConnectAsync(this)));
+            await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(this)));
         }
 
         public async Task NotifyServerAvaliable()
         {
             Avaliable = false;
-            await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(this)));
+            await Task.WhenAll(ObserverServers.Select(s => s.ConnectAsync(this)));
         }
     }
 }
