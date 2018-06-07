@@ -8,17 +8,9 @@ namespace Observer.Server
 {
     public class ObserverServerConnectMiddleware
     {
-        private readonly RequestDelegate _next;
+        public ObserverServerConnectMiddleware(RequestDelegate next) { }
 
-        public ObserverServerConnectMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        public async Task Invoke(HttpContext httpContext, IObserverServer server)
-        {
-            await server.ConnectAsync(await httpContext.DeserializeRequestBodyAsync<Client>());
-            await _next(httpContext);
-        }
+        public async Task Invoke(HttpContext context, IObserverServer server)
+            => await server.ConnectAsync(await context.DeserializeRequestBodyAsync<Client>());
     }
 }

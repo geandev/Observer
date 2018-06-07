@@ -8,17 +8,9 @@ namespace Observer.Server
 {
     public class ObserverServerDisconnectMiddleware
     {
-        private readonly RequestDelegate _next;
+        public ObserverServerDisconnectMiddleware(RequestDelegate next) { }
 
-        public ObserverServerDisconnectMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        public async Task Invoke(HttpContext httpContext, IObserverServer server)
-        {
-            await server.DisconnectAsync(await httpContext.DeserializeRequestBodyAsync<Client>());
-            await _next(httpContext);
-        }
+        public async Task Invoke(HttpContext context, IObserverServer server)
+            => await server.DisconnectAsync(await context.DeserializeRequestBodyAsync<Client>());
     }
 }

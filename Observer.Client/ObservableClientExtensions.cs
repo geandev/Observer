@@ -5,7 +5,7 @@ using System;
 
 namespace Observer.Client
 {
-    public static class ObserverClientExtensions
+    public static class ObservableClientExtensions
     {
         public static void AddObservableClient(this IServiceCollection services, string instance, Func<IObservableClientBuilder, IObservableClientBuilder> setup)
         {
