@@ -17,6 +17,7 @@ namespace Observer.Server
         {
             app.Map(Endpoints.Connect, ctx => ctx.UseMiddleware<ObserverServerConnectMiddleware>());
             app.Map(Endpoints.Disconnect, ctx => ctx.UseMiddleware<ObserverServerDisconnectMiddleware>());
+            app.Map(Endpoints.Discovery, ctx => ctx.UseMiddleware<ObserverServerDiscoveryMiddleware>());
         }
     }
 }
