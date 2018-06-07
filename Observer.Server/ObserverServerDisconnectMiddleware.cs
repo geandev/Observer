@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Observer.Core.Client;
+using Observer.Core.Extensions;
+using Observer.Core.Models;
 using Observer.Core.Server;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace Observer.Server
 
         public async Task Invoke(HttpContext httpContext, IObserverServer server)
         {
-            await server.DisconnectAsync(default(IObservableClient));
+            await server.DisconnectAsync(await httpContext.DeserializeRequestBodyAsync<Client>());
             await _next(httpContext);
         }
     }

@@ -1,8 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Observer.Core.Client;
 using Observer.Core.Models;
-using Newtonsoft.Json;
+using Observer.Core.Extensions;
 
 namespace Observer.Core.Server
 {
@@ -17,10 +16,10 @@ namespace Observer.Core.Server
             _baseUrl = baseUrl;
         }
 
-        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient
-            => _httpClient.PostAsync($"{_baseUrl}{Endpoints.Connect}", new StringContent(JsonConvert.SerializeObject(client)));
+        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : Models.Client
+            => _httpClient.PostAsync($"{_baseUrl}{Endpoints.Connect}", client.Serialize().ToStringContent());
 
-        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient =>
-            _httpClient.PostAsync($"{_baseUrl}{Endpoints.Disconnect}", new StringContent(JsonConvert.SerializeObject(client)));
+        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : Models.Client
+            => _httpClient.PostAsync($"{_baseUrl}{Endpoints.Disconnect}", client.Serialize().ToStringContent());
     }
 }

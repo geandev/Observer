@@ -8,7 +8,6 @@ namespace Observer.Core.Client
     {
         string Instance { get; }
         string Address { get; }
-        bool Avaliable { get; }
         IEnumerable<IObserverServer> ObserverServers { get; }
 
         Task NotifyServerUnvaliable();

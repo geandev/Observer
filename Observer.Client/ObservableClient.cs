@@ -8,10 +8,13 @@ namespace Observer.Client
 {
     public class ObservableClient : IObservableClient
     {
-        public string Instance { get; private set; }
-        public string Address { get; private set; }
-        public bool Avaliable { get; private set; }
         public IEnumerable<IObserverServer> ObserverServers { get; }
+
+        public Core.Models.Client Info { get; private set; }
+
+        public string Instance { get; }
+
+        public string Address { get; }
 
         public ObservableClient(IObservableClientBuilder builder)
         {
@@ -20,16 +23,11 @@ namespace Observer.Client
             ObserverServers = builder.ObserverServers;
         }
 
-        public async Task NotifyServerUnvaliable()
-        {
-            Avaliable = false;
-            await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(this)));
-        }
-
         public async Task NotifyServerAvaliable()
-        {
-            Avaliable = true;
-            await Task.WhenAll(ObserverServers.Select(s => s.ConnectAsync(this)));
-        }
+            => await Task.WhenAll(ObserverServers.Select(s => s.ConnectAsync(Core.Models.Client.FromOnline(Instance, Address))));
+
+        public async Task NotifyServerUnvaliable()
+            => await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(Core.Models.Client.FromOffiline(Instance, Address))));
+
     }
 }

@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Observer.Core.Client;
 
 namespace Observer.Core.Store
 {
     public class InMemoryClientStore : IClientStore
     {
-        private readonly IList<IObservableClient> _clients;
+        private readonly IList<Models.Client> _clients;
 
         public InMemoryClientStore()
         {
-            _clients = new List<IObservableClient>();
+            _clients = new List<Models.Client>();
         }
 
-        public Task SaveAsync<TClient>(TClient client) where TClient : IObservableClient
+        public Task SaveAsync<TClient>(TClient client) where TClient : Models.Client
         {
             _clients.Add(client);
             return Task.CompletedTask;

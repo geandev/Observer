@@ -6,6 +6,6 @@ namespace Observer.Core.Store
     public interface IClientStore
     {
         Task SaveAsync<TClient>(TClient client)
-        where TClient : IObservableClient;
+        where TClient : Models.Client;
     }
 }

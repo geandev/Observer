@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Observer.Core.Client;
+using Observer.Core.Models;
 using Observer.Core.Server;
 using Observer.Core.Store;
 
@@ -14,8 +14,8 @@ namespace Observer.Server
             _clientStore = builder.Storage;
         }
 
-        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient => _clientStore.SaveAsync(client);
+        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : Client => _clientStore.SaveAsync(client);
 
-        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient => _clientStore.SaveAsync(client);
+        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : Client => _clientStore.SaveAsync(client);
     }
 }

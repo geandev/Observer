@@ -6,9 +6,9 @@ namespace Observer.Core.Server
     public interface IObserverServer
     {
         Task ConnectAsync<TObservable>(TObservable client)
-        where TObservable : IObservableClient;
+        where TObservable : Models.Client;
 
         Task DisconnectAsync<TObservable>(TObservable client)
-        where TObservable : IObservableClient;
+        where TObservable : Models.Client;
     }
 }
