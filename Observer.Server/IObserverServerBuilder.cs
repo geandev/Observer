@@ -1,4 +1,5 @@
-﻿using Observer.Core.Store;
+﻿using Observer.Core.Server;
+using Observer.Core.Store;
 
 namespace Observer.Server
 {
@@ -7,5 +8,7 @@ namespace Observer.Server
         IClientStore Storage { get; }
 
         IObserverServerBuilder ConfigureStorage(IClientStore store);
+
+        IObserverServer Build();
     }
 }

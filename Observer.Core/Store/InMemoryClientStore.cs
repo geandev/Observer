@@ -15,7 +15,8 @@ namespace Observer.Core.Store
 
         public Task SaveAsync<TClient>(TClient client) where TClient : IObservableClient
         {
-            throw new System.NotImplementedException();
+            _clients.Add(client);
+            return Task.CompletedTask;
         }
     }
 }

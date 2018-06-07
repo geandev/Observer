@@ -9,7 +9,7 @@ namespace Observer.Server
     {
         private readonly IClientStore _clientStore;
 
-        protected ObserverServer(IObserverServerBuilder builder)
+        public ObserverServer(IObserverServerBuilder builder)
         {
             _clientStore = builder.Storage;
         }

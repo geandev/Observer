@@ -7,10 +7,12 @@ namespace Observer.Server.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddObserverServer();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseObserverServer();
         }
     }
 }
