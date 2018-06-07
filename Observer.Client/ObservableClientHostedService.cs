@@ -20,14 +20,8 @@ namespace Observer.Client
             _observerServerFactory = observerServerFactory;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
-        {
-            await _observableClient.NotifyServerAvaliable();
-        }
+        public async Task StartAsync(CancellationToken cancellationToken) => await _observableClient.NotifyServerAvaliable();
 
-        public async Task StopAsync(CancellationToken cancellationToken)
-        {
-            await _observableClient.NotifyServerUnvaliable();
-        }
+        public async Task StopAsync(CancellationToken cancellationToken) => await _observableClient.NotifyServerUnvaliable();
     }
 }

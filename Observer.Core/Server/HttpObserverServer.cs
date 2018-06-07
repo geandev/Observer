@@ -17,12 +17,10 @@ namespace Observer.Core.Server
             _baseUrl = baseUrl;
         }
 
-        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient 
+        public Task ConnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient
             => _httpClient.PostAsync($"{_baseUrl}{Endpoints.Connect}", new StringContent(JsonConvert.SerializeObject(client)));
 
-        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient
-        {
-            return _httpClient.PostAsync($"{_baseUrl}{Endpoints.Disconnect}", new StringContent(JsonConvert.SerializeObject(client)));
-        }
+        public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : IObservableClient =>
+            _httpClient.PostAsync($"{_baseUrl}{Endpoints.Disconnect}", new StringContent(JsonConvert.SerializeObject(client)));
     }
 }

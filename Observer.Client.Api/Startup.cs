@@ -9,7 +9,7 @@ namespace Observer.Client.Api
         {
             services.AddObservableClient("ClientSample",
                 config => config
-                .UseUrls("http://localhost:5000")
+                .UseUrl("http://localhost:5000")
                 .AddObserver("http://localhost:5001"));
         }
 

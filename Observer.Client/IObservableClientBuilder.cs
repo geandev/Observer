@@ -12,7 +12,7 @@ namespace Observer.Client
         IEnumerable<IObserverServer> ObserverServers { get; }
 
         IObservableClientBuilder AddObserver(string observerAddress);
-        IObservableClientBuilder UseUrls(string clientAddress);
+        IObservableClientBuilder UseUrl(string clientAddress);
         IObservableClient Build(IObserverServerFactory observerServerFactory);
     }
 }

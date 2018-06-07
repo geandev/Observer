@@ -26,7 +26,7 @@ namespace Observer.Client
             return new ObservableClient(this);
         }
 
-        public IObservableClientBuilder UseUrls(string clientAddress)
+        public IObservableClientBuilder UseUrl(string clientAddress)
         {
             Address = clientAddress;
             return this;
