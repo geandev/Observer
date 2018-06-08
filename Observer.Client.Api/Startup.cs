@@ -13,6 +13,7 @@ namespace Observer.Client.Api
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseOservableClient();
         }
     }
 }
