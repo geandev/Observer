@@ -16,7 +16,6 @@ namespace Observer.Client
 
         public ObservableClient(IObservableClientBuilder builder)
         {
-            Instance = builder.Instance;
             ObserverServers = builder.ObserverServers;
         }
 

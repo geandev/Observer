@@ -7,10 +7,12 @@ namespace Observer.Core.Extensions
     {
         public static Models.Client SetAddressFromRequest(this Models.Client client, HttpContext httpContext)
         {
+            var connection = httpContext.Connection;
             var request = httpContext.Request;
-            var address = new UriBuilder(request.Scheme, request.Host.Host, request.Host.Port.Value);
+            var address = new UriBuilder(request.Scheme, connection.RemoteIpAddress.ToString(), connection.RemotePort);
             client.SetAddress(address.Uri);
             return client;
         }
+
     }
 }
