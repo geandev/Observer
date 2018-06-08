@@ -6,6 +6,6 @@
         public const string Disconnect = "/Observer/Server/Disconnect";
         public const string Discovery = "/Observer/Server/Discovery";
         public const string Ping = "/Observer/Client/Ping";
-        public const string Health = "/Observer/Client/Heath";
+        public const string Health = "/Observer/Client/Health";
     }
 }

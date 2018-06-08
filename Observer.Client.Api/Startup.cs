@@ -7,7 +7,7 @@ namespace Observer.Client.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddObservableClient(("http://localhost:5001"));
+            services.AddObservableClient("http://localhost:5001");
         }
 
         public void Configure(IApplicationBuilder app)

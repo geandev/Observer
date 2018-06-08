@@ -4,15 +4,12 @@ using Observer.Core.Models;
 
 namespace Observer.Client
 {
-    public static partial class ObservableClientExtensions
+    public class ObservableClientHealthHostingOptions : IConfigureOptions<HealthEndpointsHostingOptions>
     {
-        public class ConfigureHealthHostingOptions : IConfigureOptions<HealthEndpointsHostingOptions>
+        public void Configure(HealthEndpointsHostingOptions options)
         {
-            public void Configure(HealthEndpointsHostingOptions options)
-            {
-                options.HealthEndpoint = Endpoints.Health;
-                options.PingEndpoint = Endpoints.Ping;
-            }
+            options.HealthEndpoint = Endpoints.Health;
+            options.PingEndpoint = Endpoints.Ping;
         }
     }
 }

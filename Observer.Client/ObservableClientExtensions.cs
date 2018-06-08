@@ -30,6 +30,10 @@ namespace Observer.Client
         public static void UseOservableClient(this IApplicationBuilder app)
         {
             app.UseHealthAllEndpoints();
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+            });
         }
 
         private static void AddObserverHealtEndpoints(this IServiceCollection services)

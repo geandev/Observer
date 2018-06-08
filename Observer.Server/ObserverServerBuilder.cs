@@ -1,4 +1,5 @@
-﻿using Observer.Core.Server;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Observer.Core.Server;
 using Observer.Core.Store;
 
 namespace Observer.Server
