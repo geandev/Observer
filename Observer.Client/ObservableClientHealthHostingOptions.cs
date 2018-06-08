@@ -6,7 +6,7 @@ namespace Observer.Client
 {
     public static partial class ObservableClientExtensions
     {
-        public class ConfigureHealthHostingOptions : IConfigureOptions<HealthEndpointsHostingOptions>
+        public class ObservableClientHealthHostingOptions : IConfigureOptions<HealthEndpointsHostingOptions>
         {
             public void Configure(HealthEndpointsHostingOptions options)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Observer.Core.Models;
 using System;
 
@@ -11,6 +12,8 @@ namespace Observer.Server
         {
             var builder = new ObserverServerBuilder();
             services.AddSingleton((setup?.Invoke(builder) ?? builder).Build());
+            services.AddSingleton(builder.Storage);
+            services.AddSingleton<IHostedService, ObserverServerHostedService>();
         }
 
         public static void UseObserverServer(this IApplicationBuilder app)
