@@ -40,7 +40,7 @@ namespace Observer.Client
                 .RegisterFromAssembly(services)
                 .BuildAndAddTo(services));
 
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<HealthEndpointsHostingOptions>, ConfigureHealthHostingOptions>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<HealthEndpointsHostingOptions>, ObservableClientHealthHostingOptions>());
             services.AddHealthEndpoints();
         }
     }
