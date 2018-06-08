@@ -8,11 +8,10 @@ namespace Observer.Client
     public interface IObservableClientBuilder
     {
         string Instance { get; }
-        string Address { get; }
+
         IEnumerable<IObserverServer> ObserverServers { get; }
 
         IObservableClientBuilder AddObserver(string observerAddress);
-        IObservableClientBuilder UseUrl(string clientAddress);
         IObservableClient Build(IObserverServerFactory observerServerFactory);
     }
 }

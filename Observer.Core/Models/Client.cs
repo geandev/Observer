@@ -2,20 +2,21 @@
 {
     public class Client
     {
-        public string Instance { get; }
-        public string Address { get; }
-        public bool Avaliable { get; }
+        public string Instance { get; private set; }
+        public string Address { get; private set; }
+        public bool Avaliable { get; private set; }
 
         public Client() { }
 
-        private Client(string instance, string address, bool avaliable)
+        private Client(string instance, bool avaliable)
         {
             Instance = instance;
-            Address = address;
             Avaliable = avaliable;
         }
 
-        public static Client FromOnline(string instance, string address) => new Client(instance, address, true);
-        public static Client FromOffiline(string instance, string address) => new Client(instance, address, false);
+        public static Client FromOnline(string instance) => new Client(instance, true);
+        public static Client FromOffiline(string instance) => new Client(instance, false);
+
+        public void SetAddress(string address) => Address = address;
     }
 }

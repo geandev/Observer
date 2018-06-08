@@ -11,6 +11,8 @@ namespace Observer.Server
         public ObserverServerConnectMiddleware(RequestDelegate next) { }
 
         public async Task Invoke(HttpContext context, IObserverServer server)
-            => await server.ConnectAsync(await context.DeserializeRequestBodyAsync<Client>());
+            => await server.ConnectAsync(await context
+                .DeserializeRequestBodyAsync<Client>()
+                .ContinueWith(t => t.Result.SetAddressFromRequest(context)));
     }
 }
