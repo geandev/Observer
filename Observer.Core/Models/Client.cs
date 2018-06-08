@@ -2,9 +2,9 @@
 {
     public class Client
     {
-        public string Instance { get; private set; }
-        public string Address { get; private set; }
-        public bool Avaliable { get; private set; }
+        public string Instance { get; set; }
+        public string Address { get; set; }
+        public bool Avaliable { get; set; }
 
         public Client() { }
 

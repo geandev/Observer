@@ -25,9 +25,5 @@ namespace Observer.Client
 
         public async Task NotifyServerUnvaliable()
             => await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(Core.Models.Client.FromOffiline(Instance))));
-
-        public async Task Health()
-            => await Task.WhenAll(ObserverServers.Select(s => s.DisconnectAsync(Core.Models.Client.FromOffiline(Instance))));
-
     }
 }

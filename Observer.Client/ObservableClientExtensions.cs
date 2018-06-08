@@ -6,19 +6,34 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Observer.Core.Factories;
-using Observer.Core.Models;
 using System;
+using System.Reflection;
 
 namespace Observer.Client
 {
-    public static class ObservableClientExtensions
+    public static partial class ObservableClientExtensions
     {
         public static void AddObservableClient(this IServiceCollection services, string instance, Func<IObservableClientBuilder, IObservableClientBuilder> setup)
         {
             services.AddSingleton(setup(new ObservableClientBuilder(instance)));
             services.AddSingleton<IHostedService, ObservableClientHostedService>();
             services.AddSingleton<IObserverServerFactory, ObserverServerFactory>();
+            services.AddObserverHealtEndpoints();
+        }
 
+        public static void AddObservableClient(this IServiceCollection services, string observableAddress)
+        {
+            var callerAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            services.AddObservableClient(callerAssemblyName, config => config.AddObserver(observableAddress));
+        }
+
+        public static void UseOservableClient(this IApplicationBuilder app)
+        {
+            app.UseHealthAllEndpoints();
+        }
+
+        private static void AddObserverHealtEndpoints(this IServiceCollection services)
+        {
             services.AddHealth(AppMetricsHealth
                 .CreateDefaultBuilder()
                 .HealthChecks
@@ -27,20 +42,6 @@ namespace Observer.Client
 
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<HealthEndpointsHostingOptions>, ConfigureHealthHostingOptions>());
             services.AddHealthEndpoints();
-        }
-
-        public static void UseOservableClient(this IApplicationBuilder app)
-        {
-            app.UseHealthAllEndpoints();
-        }
-
-        public class ConfigureHealthHostingOptions : IConfigureOptions<HealthEndpointsHostingOptions>
-        {
-            public void Configure(HealthEndpointsHostingOptions options)
-            {
-                options.HealthEndpoint = Endpoints.Health;
-                options.PingEndpoint = Endpoints.Ping;
-            }
         }
     }
 }
