@@ -7,7 +7,10 @@ namespace Observer.Client.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddObservableClient("http://localhost:5001");
+            services.AddObservableClient(config => config
+            .WithInstanceName("ClientSample")
+            .WithOrigin("http://localhost:5000")
+            .AddObserver("http://localhost:5001"));
         }
 
         public void Configure(IApplicationBuilder app)
