@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Observer.Core.Client;
 using Observer.Core.Factories;
@@ -9,14 +10,13 @@ namespace Observer.Client
     public class ObservableClientBuilder : IObservableClientBuilder
     {
         public string Instance { get; private set; }
-        public string Address { get; private set; }
+        public Uri Address { get; private set; }
 
         public readonly List<string> _observerServersAddress;
         public IEnumerable<IObserverServer> ObserverServers { get; private set; }
 
-        public ObservableClientBuilder(string instance)
+        public ObservableClientBuilder()
         {
-            Instance = instance;
             _observerServersAddress = new List<string>();
         }
 
@@ -26,15 +26,21 @@ namespace Observer.Client
             return new ObservableClient(this);
         }
 
-        public IObservableClientBuilder UseUrl(string clientAddress)
-        {
-            Address = clientAddress;
-            return this;
-        }
-
         public IObservableClientBuilder AddObserver(string observerAddress)
         {
             _observerServersAddress.Add(observerAddress);
+            return this;
+        }
+
+        public IObservableClientBuilder WithOrigin(string originAddress)
+        {
+            Address = new Uri(originAddress);
+            return this;
+        }
+
+        public IObservableClientBuilder WithInstanceName(string instanceName)
+        {
+            Instance = instanceName;
             return this;
         }
     }

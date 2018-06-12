@@ -12,7 +12,6 @@ namespace Observer.Server
 
         public async Task Invoke(HttpContext context, IObserverServer server)
             => await server.DisconnectAsync(await context
-                .DeserializeRequestBodyAsync<Client>()
-                .ContinueWith(t => t.Result.SetAddressFromRequest(context)));
+                .DeserializeRequestBodyAsync<Client>());
     }
 }
