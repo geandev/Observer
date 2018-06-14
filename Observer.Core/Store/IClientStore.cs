@@ -7,5 +7,8 @@ namespace Observer.Core.Store
     {
         Task SaveAsync<TClient>(TClient client)
         where TClient : Models.Client;
+
+        Task RemoveAsync<TClient>(TClient client)
+        where TClient : Models.Client;
     }
 }
