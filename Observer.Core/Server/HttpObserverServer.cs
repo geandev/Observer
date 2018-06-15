@@ -21,5 +21,7 @@ namespace Observer.Core.Server
 
         public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : Models.Client
             => _httpClient.PostAsync($"{_baseUrl}{Endpoints.Disconnect}", client.Serialize().ToStringContent());
+
+        public void Dispose() => _httpClient.Dispose();
     }
 }

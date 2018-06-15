@@ -17,5 +17,7 @@ namespace Observer.Server
         public Task ConnectAsync<TObservable>(TObservable client) where TObservable : Client => _clientStore.SaveAsync(client);
 
         public Task DisconnectAsync<TObservable>(TObservable client) where TObservable : Client => _clientStore.RemoveAsync(client);
+
+        public void Dispose() => _clientStore.Dispose();
     }
 }

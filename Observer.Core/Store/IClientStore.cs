@@ -1,14 +1,15 @@
-﻿using Observer.Core.Client;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Observer.Core.Store
 {
-    public interface IClientStore
+    public interface IClientStore : IDisposable
     {
-        Task SaveAsync<TClient>(TClient client)
-        where TClient : Models.Client;
+        Task<ICollection<Models.Client>> GetAllAsync();
 
-        Task RemoveAsync<TClient>(TClient client)
-        where TClient : Models.Client;
+        Task SaveAsync(Models.Client client);
+
+        Task RemoveAsync(Models.Client client);
     }
 }

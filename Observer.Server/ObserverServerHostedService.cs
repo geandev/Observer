@@ -1,22 +1,28 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Observer.Core.Store;
+using Observer.Core.Tasks;
+using Observer.Core.Extensions;
 
 namespace Observer.Server
 {
     public class ObserverServerHostedService : IHostedService
     {
-        private readonly IClientStore _clientStore;
+        private readonly HealthCheckerObserverTask _healthCheckerObserverTask;
 
-        public ObserverServerHostedService(IClientStore clientStore)
+        public ObserverServerHostedService(HealthCheckerObserverTask healthCheckerObserverTask)
         {
-            _clientStore = clientStore;
+            _healthCheckerObserverTask = healthCheckerObserverTask;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            while (true)
+            {
+                await _healthCheckerObserverTask
+                    .RunAsync()
+                    .Schedule();
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
