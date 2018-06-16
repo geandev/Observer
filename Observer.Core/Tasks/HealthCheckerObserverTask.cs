@@ -1,8 +1,9 @@
 ﻿using Observer.Core.Store;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using Observer.Core.Models;
+using Observer.Core.Extensions;
 
 namespace Observer.Core.Tasks
 {
@@ -28,14 +29,16 @@ namespace Observer.Core.Tasks
             {
                 try
                 {
-                    _logger.LogInformation($"Ping instance: {client.Instance}, address: {client.PingEndpoint}");
-                    var response = await _httpClient.GetAsync(client.PingEndpoint);
-                    _logger.LogInformation($"Response from {client.Instance}: {await response.Content.ReadAsStringAsync()}");
+                    _logger.LogInformation($"Ping instance: {client.Instance}, address: {client.HealthEndpoint}");
+                    var response = await _httpClient.GetAsync(client.HealthEndpoint);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var observableHealth = responseString.Deserialize<ObservableHealth>();
+
+                    _logger.LogInformation($"Response from {client.Instance}: {observableHealth.Status}");
                 }
                 catch (System.Exception)
                 {
                     _logger.LogWarning($"Not Found instance: {client.Instance}");
-                    await _clientStore.RemoveAsync(client);
                 }
             }
         }
